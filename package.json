@@ -36,5 +36,10 @@
   "bugs": {
     "url": "https://github.com/ULL-ESIT-SYTW-1617/gitbook-start-heroku-josue-nayra/issues"
   },
-  "homepage": "https://github.com/ULL-ESIT-SYTW-1617/gitbook-start-heroku-josue-nayra#readme"
+  "homepage": "https://github.com/ULL-ESIT-SYTW-1617/gitbook-start-heroku-josue-nayra#readme",
+  "dependencies": {
+    "fs-extra": "^0.30.0",
+    "gulp": "^3.9.1",
+    "path": "^0.12.7"
+  }
 }
