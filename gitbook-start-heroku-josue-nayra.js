@@ -47,3 +47,4 @@ var initialize = ((url) => {
 });
 
 exports.initialize = initialize;
+exports.deploy = deploy;
