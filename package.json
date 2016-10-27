@@ -1,0 +1,19 @@
+{
+  "name": "gitbook-start-heroku-josue-nayra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gitbook-start-heroku-josue-nayra.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ULL-ESIT-SYTW-1617/gitbook-start-heroku-josue-nayra.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ULL-ESIT-SYTW-1617/gitbook-start-heroku-josue-nayra/issues"
+  },
+  "homepage": "https://github.com/ULL-ESIT-SYTW-1617/gitbook-start-heroku-josue-nayra#readme"
+}
