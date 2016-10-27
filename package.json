@@ -1,16 +1,37 @@
 {
   "name": "gitbook-start-heroku-josue-nayra",
   "version": "1.0.0",
-  "description": "",
+  "description": "Plugin that lets users to deploy a gitbook in Heroku",
   "main": "gitbook-start-heroku-josue-nayra.js",
   "scripts": {
+    "start": "node ./bin/gitbook-start-heroku-josue-nayra.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ULL-ESIT-SYTW-1617/gitbook-start-heroku-josue-nayra.git"
   },
-  "author": "",
+  "contributors": [
+    {
+      "name": "Josue Toledo",
+      "email": "alu0100763492@ull.edu.es",
+      "url": "www.github.com/JosueTC94"
+    },
+    {
+      "name": "Nayra Rodriguez",
+      "email": "alu0100406122@ull.edu.es",
+      "url": "www.github.com/alu0100406122"
+    }
+  ],
+  "keywords": [
+    "Gitbook",
+    "deploy",
+    "heroku"
+  ],
+  "author": [
+    "Josue Toledo",
+    "Nayra Rodríguez"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ULL-ESIT-SYTW-1617/gitbook-start-heroku-josue-nayra/issues"
