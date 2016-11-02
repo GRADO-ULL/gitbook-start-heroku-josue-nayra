@@ -14,11 +14,13 @@ var respuesta = ((error, stdout, stderr) =>
     console.log("Stdout:"+stdout);
 });
 
-var deploy = (() => {
-    console.log("Método del plugin deploy-heroku");
+var deploy = ((ip_maquina,source,url,usuario) => {
+    console.log("Deploy to Heroku");
+    exec('git add .; git commit -m "Deploy to Heroku"; git push heroku master', respuesta); 
 });
 
-var initialize = (() => {
+
+var initialize = ((url) => {
     console.log("Método initialize del plugin deploy-heroku");
 
     var tarea_gulp = `\n\ngulp.task("deploy-heroku", ["deploy"], function(){`+
