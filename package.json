@@ -40,6 +40,11 @@
   "dependencies": {
     "fs-extra": "^0.30.0",
     "gulp": "^3.9.1",
-    "path": "^0.12.7"
+    "gulp-install": "^0.6.0",
+    "gulp-shell": "^0.5.2",
+    "heroku-client": "^3.0.0-beta3",
+    "minimist": "^1.2.0",
+    "path": "^0.12.7",
+    "simple-git": "^1.59.0"
   }
 }

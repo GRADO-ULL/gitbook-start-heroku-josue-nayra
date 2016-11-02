@@ -14,11 +14,15 @@ var respuesta = ((error, stdout, stderr) =>
     console.log("Stdout:"+stdout);
 });
 
-var initialize = ((url) => {
+var deploy = (() => {
+    console.log("Método del plugin deploy-heroku");
+});
+
+var initialize = (() => {
     console.log("Método initialize del plugin deploy-heroku");
 
     var tarea_gulp = `\n\ngulp.task("deploy-heroku", ["deploy"], function(){`+
-             `\n       require("gitbook-start-heroku-josue-nayra").deploy("${url}");`+
+             `\n       require("gitbook-start-heroku-josue-nayra").deploy();`+
              `\n});`;
 
     fs.readFile('gulpfile.js', "utf8", function(err, data) {
@@ -38,7 +42,10 @@ var initialize = ((url) => {
         }
     });
     
-    exec(`heroku login; heroku create ${json.name}`, respuesta);
+    fs.copy(path.join(__dirname,'template','app.js'), path.join(basePath, 'app.js'));
+    fs.copy(path.join(__dirname,'template','Procfile'), path.join(basePath, 'Procfile'));
+
 });
 
 exports.initialize = initialize;
+exports.deploy = deploy;
