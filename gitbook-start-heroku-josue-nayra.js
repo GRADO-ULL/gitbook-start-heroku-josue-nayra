@@ -4,7 +4,10 @@ const basePath = process.cwd();
 const fs = require('fs-extra');
 const path = require('path');
 var exec = require('child_process').exec;
-const json = require(path.join(basePath, 'package.json'));
+const pkj = require(path.join(basePath, 'package.json'));
+const git = require('simple-git');
+const Heroku = require('heroku-client');
+
 
 var respuesta = ((error, stdout, stderr) =>
 {
@@ -44,9 +47,33 @@ var initialize = ((url) => {
         }
     });
     
+    console.log("Creando app.js y Procfile");
     fs.copy(path.join(__dirname,'template','app.js'), path.join(basePath, 'app.js'));
     fs.copy(path.join(__dirname,'template','Procfile'), path.join(basePath, 'Procfile'));
 
+    //Creamos aplicacion
+    exec('heroku auth:token', ((error, stdout, stderr) =>
+    {
+      if (error)
+          console.error("Error:"+JSON.stringify(error));
+      console.log("Stderr:"+stderr);
+      console.log("Stdout(token):"+stdout);
+      console.log("Nombre app:"+pkj.Heroku.nombre_app);
+      const heroku = new Heroku({ token: stdout });
+    
+      heroku.post('/apps', {body: {name: pkj.Heroku.nombre_app}}).then(app => {
+            var respuesta = JSON.stringify(app);
+            console.log("App:"+respuesta);
+            var respuesta1 = JSON.parse(respuesta);
+            var git_url = respuesta1.git_url;
+            console.log("Git url:"+respuesta1.git_url);
+            git()
+              .init()
+              .add('./*')
+              .commit("Deploy to Heroku")
+              .addRemote('heroku', git_url);
+      });
+    }));
 });
 
 exports.initialize = initialize;
