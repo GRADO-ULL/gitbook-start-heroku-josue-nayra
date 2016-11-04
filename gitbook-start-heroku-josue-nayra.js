@@ -58,9 +58,9 @@ var initialize = (() => {
     {
       if (error)
           console.error("Error:"+JSON.stringify(error));
-      console.log("Stderr:"+stderr);
-      console.log("Stdout(token):"+stdout);
-      console.log("Nombre app:"+pkj.Heroku);
+      // console.log("Stderr:"+stderr);
+      // console.log("Stdout(token):"+stdout);
+      console.log("Aplication:\n"+JSON.stringify(pkj.Heroku));
       const heroku = new Heroku({ token: stdout });
     
       heroku.post('/apps', {body: {name: pkj.Heroku}}).then(app => {
