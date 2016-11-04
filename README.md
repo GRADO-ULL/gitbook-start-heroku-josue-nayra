@@ -5,6 +5,7 @@
 El objetivo de esta práctica es extender el package NodeJS publicado en npm en una práctica anterior con un nuevo plugin que permita realizar el despliegue en Heroku con un simple gulp deploy-heroku.
 
 El paquete gitbook-start-heroku-josue-nayra exporta dos módulos:
+
     - **Método deploy()** : Actualiza los cambios desplegando en la rama master de Heroku nuestro Gitbook. Es llamado desde la tarea del gulpfile
                             con el nombre "deploy-heroku".
     
