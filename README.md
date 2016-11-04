@@ -11,12 +11,12 @@ El paquete gitbook-start-heroku-josue-nayra exporta dos módulos:
 
 - **Método initialize()**: Este método realiza las siguientes tareas:
             
-            1.- En primer lugar, escribe en el fichero gulpfile.js una tarea "gulp deploy-heroku" que posteriormente será usada por el usuario  
-                para desplegar la aplicación. En el caso de que ya exista la tarea, no se añade una nueva.
-            2.- En segundo lugar, se añaden dos ficheros desde el directorio template/ necesarios para el despliegue en Heroku: Procfile y app.js
-            3.- En tercer lugar, se genera un token para la autenticación con Heroku.
-            4.- Finalmente, una vez autenticados se hace un post a Heroku creando la aplicación y añadimos el repositorio de Heroku remoto correspondiente.
-                
+1.- En primer lugar, escribe en el fichero gulpfile.js una tarea "gulp deploy-heroku" que posteriormente será usada por el usuario  
+    para desplegar la aplicación. En el caso de que ya exista la tarea, no se añade una nueva.
+2.- En segundo lugar, se añaden dos ficheros desde el directorio template/ necesarios para el despliegue en Heroku: Procfile y app.js
+3.- En tercer lugar, se genera un token para la autenticación con Heroku.
+4.- Finalmente, una vez autenticados se hace un post a Heroku creando la aplicación y añadimos el repositorio de Heroku remoto correspondiente.
+    
 
 
 ### Pasos a seguir para la utilización del plugin
