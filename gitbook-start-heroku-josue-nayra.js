@@ -17,13 +17,13 @@ var respuesta = ((error, stdout, stderr) =>
     console.log("Stdout:"+stdout);
 });
 
-var deploy = ((ip_maquina,source,url,usuario) => {
+var deploy = (() => {
     console.log("Deploy to Heroku");
     exec('git add .; git commit -m "Deploy to Heroku"; git push heroku master', respuesta); 
 });
 
 
-var initialize = ((url) => {
+var initialize = (() => {
     console.log("Método initialize del plugin deploy-heroku");
 
     var tarea_gulp = `\n\ngulp.task("deploy-heroku", ["deploy"], function(){`+
@@ -35,7 +35,7 @@ var initialize = ((url) => {
         // console.log(data);
         if(data.search("deploy-heroku") != -1)
         {
-          console.log("Ya existe una tarea de deploy-heroku");
+          console.log("Ya existe una tarea de deploy-heroku");    
         }
         else
         {
@@ -47,10 +47,12 @@ var initialize = ((url) => {
         }
     });
     
+    
     console.log("Creando app.js y Procfile");
     fs.copy(path.join(__dirname,'template','app.js'), path.join(basePath, 'app.js'));
     fs.copy(path.join(__dirname,'template','Procfile'), path.join(basePath, 'Procfile'));
 
+    
     //Creamos aplicacion
     exec('heroku auth:token', ((error, stdout, stderr) =>
     {
@@ -58,10 +60,10 @@ var initialize = ((url) => {
           console.error("Error:"+JSON.stringify(error));
       console.log("Stderr:"+stderr);
       console.log("Stdout(token):"+stdout);
-      console.log("Nombre app:"+pkj.Heroku.nombre_app);
+      console.log("Nombre app:"+pkj.Heroku);
       const heroku = new Heroku({ token: stdout });
     
-      heroku.post('/apps', {body: {name: pkj.Heroku.nombre_app}}).then(app => {
+      heroku.post('/apps', {body: {name: pkj.Heroku}}).then(app => {
             var respuesta = JSON.stringify(app);
             console.log("App:"+respuesta);
             var respuesta1 = JSON.parse(respuesta);

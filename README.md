@@ -1,18 +1,26 @@
-# Práctica 4. Sistemas y Tecnologías Web
+# Práctica 5. Sistemas y Tecnologías Web
 
 ## Plugin: gitbook-start-heroku-josue-nayra
 
-El objetivo de esta práctica es extender el package NodeJS desarrollado en la [pŕactica 2](https://github.com/ULL-ESIT-SYTW-1617/creacion-de-paquetes-y-modulos-en-nodejs-josue-nayra), publicado en npm con una nueva funcionalidad que permita que los usuarios con conocimientos de NodeJS puedan extender la conducta del ejecutable para que este realice el despliegue en plataformas distintas de las ya consideradas.
+El objetivo de esta práctica es extender el package NodeJS publicado en npm en una práctica anterior con un nuevo plugin que permita realizar el despliegue en Heroku con un simple gulp deploy-heroku.
 
-En esta práctica sólo se pide desarrollar el plugin para iaas.ull.es
-
-
-[Repositorio Paquete](https://github.com/ULL-ESIT-SYTW-1617/practica-plugins-heroku-josue-nayra)
+El paquete gitbook-start-heroku-josue-nayra exporta dos módulos:
+    - **Método deploy()** : Actualiza los cambios desplegando en la rama master de Heroku nuestro Gitbook. Es llamado desde la tarea del gulpfile
+                            con el nombre "deploy-heroku".
+    
+    - **Método initialize()**: Este método realiza las siguientes tareas:
+                
+                1.- En primer lugar, escribe en el fichero gulpfile.js una tarea "gulp deploy-heroku" que posteriormente será usada por el usuario  
+                    para desplegar la aplicación. En el caso de que ya exista la tarea, no se añade una nueva.
+                2.- En segundo lugar, se añaden dos ficheros desde el directorio template/ necesarios para el despliegue en Heroku: Procfile y app.js
+                3.- En tercer lugar, se genera un token para la autenticación con Heroku.
+                4.- Finalmente, una vez autenticados se hace un post a Heroku creando la aplicación y añadimos el repositorio de Heroku remoto correspondiente.
+                
 
 
 ### Pasos a seguir para la utilización del plugin
 
-1- Descargar el paquete inicial: *gitbook-start*
+1- Descargar el paquete inicial: *gitbook-start-josue-nayra*
     
 ```bash
 $ npm install -g gitbook-start-josue-nayra 
@@ -55,38 +63,36 @@ $ npm install
 5- Instalar el plugin requerido como dependendecia con la opción --save, como por ejemplo: **gitbook-start-iaas-ull-es-josue-nayra** para el despliegue en iaas.
     
 ```bash
-$ npm install --save gitbook-start-iaas-ull-es-josue-nayra 
+$ npm install --save gitbook-start-heroku-josue-nayra
 ```
 
 6- Es necesario tener el repositorio remoto actualizado. Para ello podemos ejecutar una de las tareas descritas en el gulpfile: **gulp push --mensaje <mensaje commit>**.
 
+7- Nos logueamos en Heroku a través del siguiente comando:
 
-7- El usuario debe tener su máquina IAAS configurada. Para ello debe:
-
-* Haber copiado el fichero de clave pública 'id_rsa.pub' de su máquina en el iaas para poder acceder a la misma sin necesidad de especificar usuario y contraseña cuando se realicen conexiones remotas. Para ello podemos ejecutar el siguiente comando
-en la máquina local:
-    
 ```bash
-$ scp ~/.ssh/id_rsa.pub <máquina remota>:~/.ssh/
+$ heroku login
 ```
-* En la máquina del IAAS, el usuario debe clonar el repositorio dónde se alojará el gitbook.
 
+8- Ahora debemos asignarle un nombre a la aplicación de Heroku que se creará en el siguiente paso. Para ello accedemos al package.json y rellenamos la sección de Heroku:
 
-8- Ejecutar el plugin:
+```json
+  "Heroku":{
+    "nombre_app": "<nombre de la aplicación"
+  },
+```
+
+9- Una vez que hemos instalado el plugin de Heroku,  ejecutamos el deploy:
    
 ```bash
-$ gitbook-start --deploy iaas-ull-es --IP <ip> --path <ruta_maquina> --usuarioremoto <usuario_maquina_iaas>  
+$ gitbook-start --deploy heroku  
 ```
 
-   Opciones disponibles:
-        --deploy <maquina donde se va a desplegar el gitbook>
-        --IP <ip de la máquina>
-        --usuarioremoto <usuario de la máquina>
+10- Ahora el usuario podrá ejecutar el siguiente comando y se le actualizarán los cambios en el Gitbook desplegado en Heroku:
 
-
-NOTA: El despliegue en el IAAS se realizará por defecto en el puerto 8080. En el caso que quiera cambiarse hay que acceder al fichero app.js y modificarlo.
-
-
+``` 
+$ gulp deploy-heroku 
+```
 
 ### Tareas Gulp
 
@@ -114,14 +120,14 @@ Tarea deploy genérica que actualiza las gh-pages del gitbook.
 $ gulp deploy
 ```
 
-* **deploy --<despliegue realizado>**
+* **deploy-heroku**
 
-Tarea generada posteriormente a la realización y ejecución del comando gitbook-start --deploy, que permite al usuario realizar posteriores despliegues y actualizaciones de su gitbook em la máquina remota con gulp.
-Por ejemplo, en el caso de que el usuario despliegue en el IAAS, después de haber desplegado con la opción gitbook-start --deploy iaas-ull-es, en el gulpfile se generará una tarea
-con el nombre deploy-iaas-ull-es.
+Tarea generada posteriormente a la realización y ejecución del comando gitbook-start --deploy, que permite al usuario realizar posteriores despliegues y actualizaciones de su gitbook en Heroku con gulp.
+Por ejemplo, en el caso de que el usuario despliegue en Heroku, después de haber desplegado con la opción gitbook-start --deploy heroku, en el gulpfile se generará una tarea
+con el nombre deploy-heroku.
 
 ```
-$ gulp deploy-<máquina en la se ha desplegado previamente>
+$ gulp deploy-heroku
 ```
 
 
@@ -129,16 +135,19 @@ $ gulp deploy-<máquina en la se ha desplegado previamente>
 
 - [Campus virtual](https://campusvirtual.ull.es/1617/course/view.php?id=1175)
 
-- [Descripción de la práctica](https://casianorodriguezleon.gitbooks.io/ull-esit-1617/content/practicas/practicaplugin.html)
+- [Descripción de la práctica](https://casianorodriguezleon.gitbooks.io/ull-esit-1617/content/practicas/practicaplugin2.html)
 
-- [Publicación del paquete en npm](https://www.npmjs.com/package/gitbook-start-josue-nayra)
-
-- [Repositorio en Github.com](https://github.com/ULL-ESIT-SYTW-1617/nueva-funcionalidad-para-el-paquete-npm-plugins-josue-nayra)
+- [Publicación del paquete gitbook-start-josue-nayra](https://www.npmjs.com/package/gitbook-start-josue-nayra)
 
 - [Plugin para el despliegue en IAAS](https://www.npmjs.com/package/gitbook-start-iaas-ull-es-josue-nayra)
 
-- [Repositorio del plugin iaas-ull-es](https://github.com/ULL-ESIT-SYTW-1617/gitbook-start-iaas-ull-es-josue-nayra) 
+- [Plugin para el despliegue con Heroku](https://www.npmjs.com/package/gitbook-start-heroku-josue-nayra)
 
+- [Repositorio del plugin Heroku](https://github.com/ULL-ESIT-SYTW-1617/gitbook-start-heroku-josue-nayra/) 
+
+- [Repositorio del plugin IAAS](https://github.com/ULL-ESIT-SYTW-1617/gitbook-start-iaas-ull-es-josue-nayra) 
+
+- [Repositorio de gitbook-start-josue-nayra](https://github.com/ULL-ESIT-SYTW-1617/nueva-funcionalidad-para-el-paquete-npm-plugins-josue-nayra)
 
 
 
