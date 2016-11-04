@@ -60,13 +60,13 @@ var initialize = (() => {
           console.error("Error:"+JSON.stringify(error));
       // console.log("Stderr:"+stderr);
       // console.log("Stdout(token):"+stdout);
-      console.log("Aplication:\n"+JSON.stringify(pkj.Heroku));
+      // console.log("Aplication:\n"+JSON.stringify(pkj.Heroku));
       const heroku = new Heroku({ token: stdout });
     
     
       heroku.post('/apps', {body: {name: pkj.Heroku.nombre_app}}).then(app => {
             var respuesta = JSON.stringify(app);
-            console.log("App:"+respuesta);
+            // console.log("App:"+respuesta);
             var respuesta1 = JSON.parse(respuesta);
             var git_url = respuesta1.git_url;
             console.log("Git url:"+respuesta1.git_url);
