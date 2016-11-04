@@ -63,7 +63,8 @@ var initialize = (() => {
       console.log("Aplication:\n"+JSON.stringify(pkj.Heroku));
       const heroku = new Heroku({ token: stdout });
     
-      heroku.post('/apps', {body: {name: pkj.Heroku}}).then(app => {
+    
+      heroku.post('/apps', {body: {name: pkj.Heroku.nombre_app}}).then(app => {
             var respuesta = JSON.stringify(app);
             console.log("App:"+respuesta);
             var respuesta1 = JSON.parse(respuesta);
