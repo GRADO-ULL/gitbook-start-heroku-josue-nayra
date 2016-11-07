@@ -64,7 +64,7 @@ $ cd <directorio en el que se ha desplegado el libro>
 $ npm install 
 ```
 
-5- Instalar el plugin requerido como dependendecia con la opción --save, como por ejemplo: **gitbook-start-iaas-ull-es-josue-nayra** para el despliegue en iaas.
+5- Instalar el plugin requerido como dependendecia con la opción --save, como por ejemplo: **gitbook-start-heroku-ull-es-josue-nayra** para el despliegue en iaas.
     
 ```bash
 $ npm install --save gitbook-start-heroku-josue-nayra
@@ -78,6 +78,7 @@ $ npm install --save gitbook-start-heroku-josue-nayra
 $ heroku login
 ```
 
+
 8- Ahora debemos asignarle un nombre a la aplicación de Heroku que se creará en el siguiente paso. Para ello accedemos al package.json y rellenamos la sección de Heroku:
 
 ```json
@@ -86,17 +87,30 @@ $ heroku login
   },
 ```
 
+
 9- Una vez que hemos instalado el plugin de Heroku,  ejecutamos el deploy:
    
 ```bash
 $ gitbook-start --deploy heroku  
 ```
 
+Una vez ejecutado el comando anterior, se generará automáticamente en el gulpfile.js una tarea llamada 
+"deploy-<máquina en la que realizar el despliegue>" que permitirá al usuario actualizar el contenido de dicha máquina.
+
+```javascript
+gulp.task("deploy-<máquina en la que realizar el despliegue>", function(){
+    require(path.join(basePath, 'node_modules','<plugin de depliegue>')).deploy(...);
+});
+```
+
+
+
 10- Ahora el usuario podrá ejecutar el siguiente comando y se le actualizarán los cambios en el Gitbook desplegado en Heroku:
 
 ``` 
 $ gulp deploy-heroku 
 ```
+
 
 ### Tareas Gulp
 
@@ -152,6 +166,8 @@ $ gulp deploy-heroku
 - [Repositorio del plugin IAAS](https://github.com/ULL-ESIT-SYTW-1617/gitbook-start-iaas-ull-es-josue-nayra) 
 
 - [Repositorio de gitbook-start-josue-nayra](https://github.com/ULL-ESIT-SYTW-1617/nueva-funcionalidad-para-el-paquete-npm-plugins-josue-nayra)
+
+- [Repositorio MAIN Heroku](https://github.com/ULL-ESIT-SYTW-1617/practica-plugins-heroku-josue-nayra)
 
 
 
