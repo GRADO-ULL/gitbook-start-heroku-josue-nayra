@@ -26,7 +26,7 @@ var deploy = (() => {
 var initialize = (() => {
     console.log("Método initialize del plugin deploy-heroku");
 
-    var tarea_gulp = `\n\ngulp.task("deploy-heroku", ["deploy"], function(){`+
+    var tarea_gulp = `\n\ngulp.task("deploy-heroku", function(){`+
              `\n       require("gitbook-start-heroku-josue-nayra").deploy();`+
              `\n});`;
 
