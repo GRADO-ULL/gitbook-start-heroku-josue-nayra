@@ -88,7 +88,13 @@ $ heroku login
 ```
 
 
-9- Una vez que hemos instalado el plugin de Heroku,  ejecutamos el deploy:
+9- Para construir el libro disponemos de una tarea en el gulpfile denominada "build".
+
+```bash
+$ gulp build
+```
+
+10- Una vez que hemos instalado el plugin de Heroku,  ejecutamos el deploy:
    
 ```bash
 $ gitbook-start --deploy heroku  
@@ -104,8 +110,7 @@ gulp.task("deploy-<máquina en la que realizar el despliegue>", function(){
 ```
 
 
-
-10- Ahora el usuario podrá ejecutar el siguiente comando y se le actualizarán los cambios en el Gitbook desplegado en Heroku:
+11- Ahora el usuario podrá ejecutar el siguiente comando y se le actualizarán los cambios en el Gitbook desplegado en Heroku:
 
 ``` 
 $ gulp deploy-heroku 
@@ -130,6 +135,15 @@ Tarea que permite al usuario instalar plugins y dependencias necesarias para su 
 ```bash
 & gulp instalar_recursos
 ```
+
+* **build**
+
+Tarea para la construcción del libro.
+
+```bash
+$ gulp build
+```
+
 
 * **deploy**
 
